@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { Loader2 } from 'lucide-react'
+import { SplitTextReveal } from '../shared/SplitTextReveal'
 
 interface VideoScrollHeroProps {
   videoUrl: string
@@ -146,22 +147,19 @@ export function VideoScrollHero({ videoUrl, heading, subheading }: VideoScrollHe
             initial={{ opacity: 0, scale: 0.8, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.3, ease: 'easeOut' }}
-            className="mb-8 inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/20 bg-white/10 backdrop-blur-md text-sm font-medium text-white/90 uppercase tracking-widest shadow-[0_0_20px_rgba(255,255,255,0.1)]"
+            className="mb-8 inline-flex items-center gap-2 px-6 py-2 rounded-full border-[0.5px] border-white/30 bg-transparent text-xs font-bold text-white uppercase tracking-[0.3em]"
           >
             <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
             Premium Design-Build
           </motion.div>
 
-          <motion.h1 
-            initial={{ y: 50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 1, delay: 0.5, ease: 'easeOut' }}
-            className="text-6xl md:text-7xl lg:text-9xl font-bold text-white tracking-tighter mb-8 max-w-6xl leading-[1.1] drop-shadow-2xl"
-          >
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-white/70">
-              {heading}
-            </span>
-          </motion.h1>
+          <div className="text-white text-center mb-8 max-w-6xl drop-shadow-2xl">
+            <SplitTextReveal 
+              text={heading}
+              className="text-6xl md:text-7xl lg:text-[10rem] font-bold tracking-tighter leading-[0.9] justify-center"
+              delay={0.5}
+            />
+          </div>
 
           <motion.p 
             initial={{ y: 30, opacity: 0 }}

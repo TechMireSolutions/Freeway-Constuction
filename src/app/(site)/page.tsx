@@ -8,6 +8,9 @@ import Link from 'next/link'
 import * as Icons from 'lucide-react'
 import { urlFor } from '@/lib/sanity/image'
 import Image from 'next/image'
+import { SplitTextReveal } from '@/components/shared/SplitTextReveal'
+import { ParallaxImage } from '@/components/shared/ParallaxImage'
+import { AnimatedNumber } from '@/components/shared/AnimatedNumber'
 
 export const revalidate = 60
 
@@ -81,15 +84,17 @@ export default async function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <RevealOnScroll direction="right">
               <div className="flex gap-4">
-                <div className="w-1/2 rounded-2xl bg-gray-200 h-96 relative overflow-hidden">
+                <div className="w-1/2 rounded-[2rem] bg-gray-200 h-96 relative overflow-hidden">
+                  <ParallaxImage src="/placeholder-1.jpg" alt="Construction Worker" className="w-full h-full" />
                   <div className="absolute inset-0 bg-ink/10" />
                 </div>
                 <div className="w-1/2 flex flex-col gap-4">
-                  <div className="bg-accent text-white p-6 rounded-2xl flex flex-col justify-center items-center text-center h-44">
-                    <span className="text-4xl font-bold">25+</span>
-                    <span className="text-sm mt-2">Years Experience of Construction Company</span>
+                  <div className="bg-accent text-white p-8 rounded-[2rem] flex flex-col justify-center items-center text-center h-44">
+                    <span className="text-5xl font-bold font-serif italic"><AnimatedNumber value="25+" /></span>
+                    <span className="text-sm mt-2 uppercase tracking-widest opacity-90 font-medium">Years Experience</span>
                   </div>
-                  <div className="rounded-2xl bg-gray-200 h-48 relative overflow-hidden">
+                  <div className="rounded-[2rem] bg-gray-200 h-48 relative overflow-hidden">
+                    <ParallaxImage src="/placeholder-2.jpg" alt="Construction Site" className="w-full h-full" />
                     <div className="absolute inset-0 bg-ink/10" />
                   </div>
                 </div>
@@ -102,11 +107,12 @@ export default async function HomePage() {
                   <span className="w-12 h-[2px] bg-accent" />
                   About Us
                 </h3>
-                <h2 className="text-4xl md:text-6xl font-bold max-w-4xl tracking-tighter mb-6 leading-tight">
-                  We're Always Think On Your Dream
-                </h2>
-                <p className="text-gray mb-8">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                <SplitTextReveal 
+                  text="We're Always Think On Your Dream"
+                  className="text-5xl md:text-7xl font-bold max-w-4xl tracking-tighter mb-8 leading-[1.1]"
+                />
+                <p className="text-gray mb-10 text-lg leading-relaxed">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                 </p>
                 
                 <div className="flex flex-col gap-6">
@@ -152,36 +158,54 @@ export default async function HomePage() {
               </Link>
             </div>
           </RevealOnScroll>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {displayServices.map((service: any, index: number) => {
-              // @ts-ignore
-              const IconComponent = Icons[service.icon] || Icons.Briefcase
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {displayServices.slice(0, 3).map((service: any, index: number) => {
               return (
                 <RevealOnScroll key={service._id} direction="up" delay={index * 0.1}>
-                  <Link href={`/services/${service.slug || ''}`} className="block group">
-                    <div className="bg-white p-8 rounded-2xl shadow-sm border border-border hover:shadow-lg transition-all duration-300 h-full">
-                      <div className="bg-base w-14 h-14 rounded-full flex items-center justify-center mb-6 group-hover:bg-accent group-hover:text-white transition-colors duration-300">
-                        <IconComponent size={24} />
+                  <Link href={`/services/${service.slug || ''}`} className="block group relative h-full">
+                    <div className="relative aspect-[4/5] rounded-[2rem] overflow-hidden mb-8">
+                      <Image 
+                        src={`/placeholder-${(index % 2) + 1}.jpg`} 
+                        alt={service.title} 
+                        fill 
+                        className="object-cover transition-transform duration-1000 group-hover:scale-110" 
+                      />
+                      <div className="absolute inset-0 bg-ink/20 group-hover:bg-ink/40 transition-colors duration-500" />
+                    </div>
+                    
+                    {/* Overlapping Card */}
+                    <div className="bg-white p-8 md:p-10 absolute bottom-0 left-4 right-4 md:-bottom-12 md:left-8 md:right-8 transition-transform duration-500 group-hover:-translate-y-4 shadow-[0_30px_60px_rgba(0,0,0,0.05)] flex flex-col justify-between" style={{ borderTopLeftRadius: '2rem', borderBottomRightRadius: '2rem' }}>
+                      <div>
+                        <h3 className="text-xl md:text-2xl font-bold mb-4 line-clamp-1">{service.title}</h3>
+                        <p className="text-gray text-sm md:text-base line-clamp-3 mb-6 leading-relaxed">
+                          {service.shortDescription}
+                        </p>
                       </div>
-                      <h3 className="text-xl font-bold mb-3">{service.title}</h3>
-                      <p className="text-gray">{service.shortDescription}</p>
+                      <span className="text-xs font-bold tracking-widest uppercase flex items-center gap-2 group-hover:text-accent transition-colors">
+                        View All Services &rarr;
+                      </span>
                     </div>
                   </Link>
                 </RevealOnScroll>
               )
             })}
           </div>
+          <div className="h-16 md:h-24"></div> {/* Spacer for the overlapping cards */}
         </div>
       </AnimatedSection>
 
-      <AnimatedSection className="py-24 bg-ink text-white">
-        <div className="container mx-auto px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+      <AnimatedSection className="py-24 bg-ink text-white overflow-hidden relative">
+        <div className="absolute inset-0 opacity-5 bg-[url('/noise.png')] pointer-events-none mix-blend-overlay"></div>
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="flex flex-col md:flex-row justify-around items-center gap-16">
             {stats.map((stat: any, index: number) => (
               <RevealOnScroll key={stat._key} direction="up" delay={index * 0.1}>
-                <div className="text-center md:text-left">
-                  <div className="text-5xl md:text-6xl font-bold text-accent mb-2">{stat.number}</div>
-                  <div className="text-lg font-medium text-gray-300">{stat.label}</div>
+                <div className="text-center group">
+                  <AnimatedNumber 
+                    value={stat.number} 
+                    className="text-7xl md:text-8xl font-bold font-serif italic text-transparent bg-clip-text bg-gradient-to-br from-accent to-[#d4af37] mb-4 drop-shadow-2xl transition-transform duration-500 group-hover:scale-110" 
+                  />
+                  <div className="text-xl font-medium tracking-widest uppercase opacity-80">{stat.label}</div>
                 </div>
               </RevealOnScroll>
             ))}
@@ -231,7 +255,10 @@ export default async function HomePage() {
                   Team Members
                   <span className="w-8 h-[2px] bg-accent" />
                 </h3>
-                <h2 className="text-4xl md:text-5xl font-bold tracking-tighter">Our Professional Team</h2>
+                <SplitTextReveal 
+                  text="Our Professional Team"
+                  className="text-5xl md:text-7xl font-bold tracking-tighter justify-center"
+                />
               </div>
             </RevealOnScroll>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -273,16 +300,19 @@ export default async function HomePage() {
                   Reviews
                   <span className="w-8 h-[2px] bg-accent" />
                 </h3>
-                <h2 className="text-4xl md:text-5xl font-bold tracking-tighter">What Our Client Say?</h2>
+                <SplitTextReveal 
+                  text="What Our Client Say?"
+                  className="text-5xl md:text-7xl font-bold tracking-tighter justify-center"
+                />
               </div>
             </RevealOnScroll>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {displayTestimonials.map((testimonial: any, i: number) => (
                 <RevealOnScroll key={testimonial._id} direction="up" delay={i * 0.1}>
-                  <div className="bg-[#B9A37E] rounded-[40px] rounded-tl-none p-10 flex flex-col md:flex-row gap-8 items-center text-white relative">
-                    <div className="absolute -bottom-8 right-12 text-9xl text-white/20 font-serif leading-none">"</div>
-                    <div className="w-32 h-32 shrink-0 rounded-full bg-white/20 overflow-hidden relative border-4 border-white/30">
+                  <div className="bg-white rounded-[3rem] rounded-tl-none p-12 flex flex-col md:flex-row gap-10 items-center text-ink relative shadow-[0_40px_80px_rgba(0,0,0,0.04)] border border-border group-hover:border-accent transition-colors duration-500">
+                    <div className="absolute -bottom-8 right-12 text-[10rem] text-base font-serif leading-none rotate-12 group-hover:-rotate-12 transition-transform duration-700">"</div>
+                    <div className="w-40 h-40 shrink-0 rounded-full bg-base overflow-hidden relative border-[6px] border-white shadow-xl">
                       {testimonial.clientPhoto ? (
                         <Image 
                           src={urlFor(testimonial.clientPhoto).url()} 
@@ -291,18 +321,18 @@ export default async function HomePage() {
                           className="object-cover"
                         />
                       ) : (
-                        <div className="w-full h-full flex items-center justify-center bg-white/20">
-                          <Icons.User size={32} />
+                        <div className="w-full h-full flex items-center justify-center bg-base text-gray">
+                          <Icons.User size={40} />
                         </div>
                       )}
                     </div>
                     <div className="flex flex-col relative z-10">
-                      <p className="text-sm font-medium mb-6 leading-relaxed opacity-90 italic">
+                      <p className="text-xl md:text-2xl font-serif italic mb-8 leading-relaxed opacity-90 text-gray">
                         {testimonial.quote}
                       </p>
                       <div>
-                        <h4 className="text-xl font-bold">{testimonial.clientName}</h4>
-                        <p className="text-white/70 text-xs">{testimonial.companyLocation}</p>
+                        <h4 className="text-2xl font-bold uppercase tracking-tight">{testimonial.clientName}</h4>
+                        <p className="text-accent font-medium tracking-widest text-xs uppercase mt-1">{testimonial.companyLocation}</p>
                       </div>
                     </div>
                   </div>
