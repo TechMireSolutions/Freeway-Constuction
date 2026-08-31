@@ -18,7 +18,7 @@ export const homePageQuery = groq`
   *[_type == "homePage"][0] {
     heroHeading,
     heroSubheading,
-    "heroVideoUrl": heroVideo.asset->url,
+    heroBackgroundImage,
     stats,
     ctaBanner {
       heading,

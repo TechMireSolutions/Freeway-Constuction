@@ -16,11 +16,11 @@ export default defineType({
       type: 'string',
     }),
     defineField({
-      name: 'heroVideo',
-      title: 'Hero Video',
-      type: 'file',
+      name: 'heroBackgroundImage',
+      title: 'Hero Background Image',
+      type: 'image',
       options: {
-        accept: 'video/*',
+        hotspot: true,
       },
     }),
     defineField({

@@ -35,7 +35,7 @@ export default async function HomePage() {
   // Fallback data if Sanity is not connected
   const heroHeading = homeData?.heroHeading || "We Build Spaces That Last."
   const heroSubheading = homeData?.heroSubheading || "Premium construction and design-build services."
-  const heroVideoUrl = homeData?.heroVideoUrl || "/sample-video.mp4"
+  const heroBackgroundImage = homeData?.heroBackgroundImage || null
   const stats = homeData?.stats || [
     { _key: '1', number: '3K+', label: 'Team Members' },
     { _key: '2', number: '1.9K+', label: 'Clients Are Happy' },
@@ -72,43 +72,49 @@ export default async function HomePage() {
 
   return (
     <>
-      <section className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-[calc(100vh-2rem)] m-4 rounded-[2.5rem] flex items-center overflow-hidden shadow-2xl">
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <Image 
-            src="/placeholder-1.jpg" 
-            alt="Construction Background" 
+            src={heroBackgroundImage ? urlFor(heroBackgroundImage).url() : "/placeholder-1.jpg"} 
+            alt="Interior Background" 
             fill
             sizes="100vw"
             className="object-cover"
             priority
           />
-          <div className="absolute inset-0 bg-black/40" />
+          <div className="absolute inset-0 bg-black/10" />
         </div>
 
         {/* Content */}
-        <div className="container mx-auto px-6 relative z-10 text-center flex flex-col items-center mt-20">
-          <RevealOnScroll direction="up">
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white max-w-5xl mx-auto tracking-tight leading-[1.1] mb-6">
-              Your Trusted Construction Partner
+        <div className="container mx-auto px-8 md:px-16 relative z-10 w-full flex flex-col md:flex-row justify-between items-end pb-16 pt-40 gap-16">
+          <div className="w-full md:w-[55%]">
+            <h1 className="text-[4rem] md:text-[6.5rem] lg:text-[7.5rem] font-normal text-white leading-[0.95] tracking-tight">
+              BUILDING<br />
+              SPACES,<br />
+              SHAPING<br />
+              FUTURES
             </h1>
-          </RevealOnScroll>
-          <RevealOnScroll direction="up" delay={0.2}>
-            <p className="text-xl md:text-2xl text-gray-200 mb-10 max-w-2xl mx-auto">
-              {heroSubheading}
+          </div>
+          <div className="w-full md:w-[45%] flex flex-col gap-8 pb-2">
+            <p className="text-lg md:text-[1.35rem] text-white/95 font-normal leading-relaxed max-w-lg">
+              At Novadesign, we combine innovative design with exceptional craftsmanship to create homes, offices, and commercial spaces that inspire. From concept to completion, we turn your vision into reality with precision, style, and a personal touch.
             </p>
-          </RevealOnScroll>
-          <RevealOnScroll direction="up" delay={0.4}>
-            <Link 
-              href="/contact" 
-              className="inline-flex items-center gap-2 bg-accent text-white px-8 py-4 rounded-full font-medium text-lg hover:bg-orange-600 transition-colors"
-            >
-              Get a quote
-              <div className="w-8 h-8 rounded-full bg-white text-accent flex items-center justify-center ml-2">
-                <Icons.Play size={16} className="ml-1" />
-              </div>
-            </Link>
-          </RevealOnScroll>
+            <div className="flex flex-wrap items-center gap-4">
+              <Link 
+                href="/contact" 
+                className="px-8 py-3.5 rounded-full bg-black text-white font-medium text-[13px] hover:bg-black/80 transition-colors"
+              >
+                Get a Quote
+              </Link>
+              <Link 
+                href="/portfolio" 
+                className="px-8 py-3.5 rounded-full bg-white/10 backdrop-blur-md border border-white/30 text-white font-medium text-[13px] hover:bg-white/20 transition-colors"
+              >
+                View Our Works
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
 
