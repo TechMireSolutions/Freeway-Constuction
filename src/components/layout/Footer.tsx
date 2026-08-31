@@ -9,7 +9,7 @@ export function Footer() {
       <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12">
         <div className="flex flex-col gap-4">
           <Link href="/" className="text-2xl font-bold tracking-tighter text-white">
-            Freeway Constructions
+            Freeway
           </Link>
           <p className="text-gray mt-2 max-w-sm">
             Building spaces that last. Premium construction and design-build services.

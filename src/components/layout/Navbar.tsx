@@ -29,7 +29,7 @@ export function Navbar() {
       <header
         className={`pointer-events-auto transition-all duration-300 w-full max-w-5xl rounded-full border ${
           isScrolled 
-            ? 'bg-white/70 backdrop-blur-xl shadow-lg border-white/20 py-3' 
+            ? 'bg-white/70 backdrop-blur-xl shadow-lg border-white/20 py-3 text-ink' 
             : 'bg-black/20 backdrop-blur-md shadow-lg border-white/10 py-4 text-white'
         }`}
       >
@@ -38,56 +38,56 @@ export function Navbar() {
             Freeway
           </Link>
 
-        {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-8 font-medium">
-          {navLinks.map((link) => (
+          {/* Desktop Nav */}
+          <nav className="hidden md:flex items-center gap-8 font-medium">
+            {navLinks.map((link) => (
+              <Link
+                key={link.name}
+                href={link.href}
+                className="hover:text-accent transition-colors duration-200"
+              >
+                {link.name}
+              </Link>
+            ))}
             <Link
-              key={link.name}
-              href={link.href}
-              className="hover:text-accent transition-colors duration-200"
+              href="/contact"
+              className="px-6 py-2.5 rounded-full bg-accent text-base text-white hover:bg-ink-light transition-transform hover:scale-105 duration-200"
             >
-              {link.name}
+              Get a quote
             </Link>
-          ))}
-          <Link
-            href="/contact"
-            className="px-6 py-2.5 rounded-full bg-ink text-base text-white hover:bg-ink-light transition-transform hover:scale-105 duration-200"
-          >
-            Get an Estimate
-          </Link>
-        </nav>
+          </nav>
 
-        {/* Mobile Menu Toggle */}
-        <button
-          className={`md:hidden ${isScrolled ? 'text-ink' : 'text-white'}`}
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-        >
-          {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
-        </button>
-      </div>
-
-      {/* Mobile Drawer */}
-      {mobileMenuOpen && (
-        <div className="absolute top-[110%] left-0 w-full bg-white/95 backdrop-blur-xl shadow-xl rounded-2xl flex flex-col px-6 py-4 gap-4 md:hidden text-ink pointer-events-auto">
-          {navLinks.map((link) => (
-            <Link
-              key={link.name}
-              href={link.href}
-              className="text-lg font-medium py-2 border-b border-border last:border-0"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              {link.name}
-            </Link>
-          ))}
-          <Link
-            href="/contact"
-            onClick={() => setMobileMenuOpen(false)}
-            className="w-full text-center mt-2 px-6 py-3 rounded-full bg-ink text-white font-medium"
+          {/* Mobile Menu Toggle */}
+          <button
+            className={`md:hidden ${isScrolled ? 'text-ink' : 'text-white'}`}
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
-            Get an Estimate
-          </Link>
+            {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
         </div>
-      )}
+
+        {/* Mobile Drawer */}
+        {mobileMenuOpen && (
+          <div className="absolute top-[110%] left-0 w-full bg-white/95 backdrop-blur-xl shadow-xl rounded-2xl flex flex-col px-6 py-4 gap-4 md:hidden text-ink pointer-events-auto">
+            {navLinks.map((link) => (
+              <Link
+                key={link.name}
+                href={link.href}
+                className="text-lg font-medium py-2 border-b border-border last:border-0"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {link.name}
+              </Link>
+            ))}
+            <Link
+              href="/contact"
+              onClick={() => setMobileMenuOpen(false)}
+              className="w-full text-center mt-2 px-6 py-3 rounded-full bg-accent text-white font-medium"
+            >
+              Get a quote
+            </Link>
+          </div>
+        )}
       </header>
     </div>
   )

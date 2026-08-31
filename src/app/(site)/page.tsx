@@ -1,7 +1,6 @@
 import React from 'react'
 import { client } from '@/lib/sanity/client'
 import { homePageQuery, servicesQuery, featuredProjectsQuery, testimonialsQuery, aboutPageQuery } from '@/lib/sanity/queries'
-import { VideoScrollHero } from '@/components/home/VideoScrollHero'
 import { AnimatedSection } from '@/components/shared/AnimatedSection'
 import { RevealOnScroll } from '@/components/shared/RevealOnScroll'
 import Link from 'next/link'
@@ -73,29 +72,61 @@ export default async function HomePage() {
 
   return (
     <>
-      <VideoScrollHero 
-        videoUrl={heroVideoUrl} 
-        heading={heroHeading} 
-        subheading={heroSubheading} 
-      />
+      <section className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <Image 
+            src="/placeholder-1.jpg" 
+            alt="Construction Background" 
+            fill
+            sizes="100vw"
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-black/40" />
+        </div>
+
+        {/* Content */}
+        <div className="container mx-auto px-6 relative z-10 text-center flex flex-col items-center mt-20">
+          <RevealOnScroll direction="up">
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white max-w-5xl mx-auto tracking-tight leading-[1.1] mb-6">
+              Your Trusted Construction Partner
+            </h1>
+          </RevealOnScroll>
+          <RevealOnScroll direction="up" delay={0.2}>
+            <p className="text-xl md:text-2xl text-gray-200 mb-10 max-w-2xl mx-auto">
+              {heroSubheading}
+            </p>
+          </RevealOnScroll>
+          <RevealOnScroll direction="up" delay={0.4}>
+            <Link 
+              href="/contact" 
+              className="inline-flex items-center gap-2 bg-accent text-white px-8 py-4 rounded-full font-medium text-lg hover:bg-orange-600 transition-colors"
+            >
+              Get a quote
+              <div className="w-8 h-8 rounded-full bg-white text-accent flex items-center justify-center ml-2">
+                <Icons.Play size={16} className="ml-1" />
+              </div>
+            </Link>
+          </RevealOnScroll>
+        </div>
+      </section>
 
       <AnimatedSection className="py-24 bg-white">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <RevealOnScroll direction="right">
               <div className="flex gap-4">
-                <div className="w-1/2 rounded-[2rem] bg-gray-200 h-96 relative overflow-hidden">
-                  <ParallaxImage src="/placeholder-1.jpg" alt="Construction Worker" className="w-full h-full" />
-                  <div className="absolute inset-0 bg-ink/10" />
+                <div className="w-1/2 rounded-[2rem] rounded-bl-none bg-gray-200 h-96 relative overflow-hidden">
+                  <Image src="/placeholder-2.jpg" alt="Construction Worker" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
                 </div>
                 <div className="w-1/2 flex flex-col gap-4">
-                  <div className="bg-accent text-white p-8 rounded-[2rem] flex flex-col justify-center items-center text-center h-44">
-                    <span className="text-5xl font-bold font-serif italic"><AnimatedNumber value="25+" /></span>
-                    <span className="text-sm mt-2 uppercase tracking-widest opacity-90 font-medium">Years Experience</span>
+                  <div className="bg-accent text-white p-8 rounded-[2rem] rounded-tr-none flex flex-col justify-center items-center text-center h-44 shadow-xl relative -ml-12 z-10 mt-12">
+                    <span className="text-5xl font-bold"><AnimatedNumber value="25+" /></span>
+                    <span className="text-sm mt-2 font-medium">Years Experience</span>
                   </div>
-                  <div className="rounded-[2rem] bg-gray-200 h-48 relative overflow-hidden">
-                    <ParallaxImage src="/placeholder-2.jpg" alt="Construction Site" className="w-full h-full" />
-                    <div className="absolute inset-0 bg-ink/10" />
+                  <div className="rounded-[2rem] rounded-br-none bg-gray-200 h-48 relative overflow-hidden mt-4">
+                    <Image src="/placeholder-1.jpg" alt="Construction Site" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
                   </div>
                 </div>
               </div>
@@ -103,36 +134,36 @@ export default async function HomePage() {
             
             <RevealOnScroll direction="left">
               <div>
-                <h3 className="text-accent font-bold tracking-widest uppercase mb-4 flex items-center gap-4">
+                <h3 className="text-accent font-bold uppercase mb-4 flex items-center gap-4">
                   <span className="w-12 h-[2px] bg-accent" />
-                  About Us
+                  The Largest Privately Held Real Estate Investors And Managers In The World
                 </h3>
                 <SplitTextReveal 
                   text="We're Always Think On Your Dream"
-                  className="text-5xl md:text-7xl font-bold max-w-4xl tracking-tighter mb-8 leading-[1.1]"
+                  className="text-4xl md:text-6xl font-bold max-w-4xl tracking-tighter mb-8 leading-[1.1]"
                 />
-                <p className="text-gray mb-10 text-lg leading-relaxed">
+                <p className="text-gray-600 mb-10 text-lg leading-relaxed">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                 </p>
                 
                 <div className="flex flex-col gap-6">
                   <div className="flex gap-4 items-start">
-                    <div className="w-12 h-12 rounded-xl bg-base flex items-center justify-center shrink-0">
+                    <div className="w-12 h-12 rounded-xl bg-gray-100 flex items-center justify-center shrink-0">
                       <Icons.Globe className="text-accent" />
                     </div>
                     <div>
                       <h4 className="font-bold text-lg mb-1">Worldwide Services</h4>
-                      <p className="text-gray text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod.</p>
+                      <p className="text-gray-500 text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod.</p>
                     </div>
                   </div>
                   
                   <div className="flex gap-4 items-start">
-                    <div className="w-12 h-12 rounded-xl bg-base flex items-center justify-center shrink-0">
+                    <div className="w-12 h-12 rounded-xl bg-gray-100 flex items-center justify-center shrink-0">
                       <Icons.Award className="text-accent" />
                     </div>
                     <div>
                       <h4 className="font-bold text-lg mb-1">Best Company Award Winners</h4>
-                      <p className="text-gray text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod.</p>
+                      <p className="text-gray-500 text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod.</p>
                     </div>
                   </div>
                 </div>
@@ -142,70 +173,60 @@ export default async function HomePage() {
         </div>
       </AnimatedSection>
 
-      <AnimatedSection className="py-24 bg-base">
+      <AnimatedSection className="py-24 bg-[#0a0a0a] text-white rounded-[3rem]">
         <div className="container mx-auto px-6">
           <RevealOnScroll direction="up" delay={0.1}>
-            <div className="flex justify-between items-end mb-12">
-              <div>
-                <h3 className="text-accent font-bold tracking-widest uppercase mb-4 flex items-center gap-4">
-                  <span className="w-12 h-[2px] bg-accent" />
-                  Our Project
-                </h3>
-                <h2 className="text-4xl md:text-5xl font-bold tracking-tighter">Building Your Dream Projects</h2>
-              </div>
-              <Link href="/services" className="hidden md:inline-flex items-center bg-accent/10 text-accent hover:bg-accent hover:text-white px-6 py-3 rounded-full transition-colors font-medium uppercase text-sm tracking-wider">
-                View All Projects &rarr;
-              </Link>
+            <div className="mb-12">
+              <h3 className="text-accent font-bold uppercase mb-4 flex items-center gap-4">
+                <span className="w-12 h-[2px] bg-accent" />
+                Services
+              </h3>
+              <h2 className="text-4xl md:text-5xl font-bold tracking-tighter max-w-xl">Construction Service To Our Clients</h2>
             </div>
           </RevealOnScroll>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {displayServices.slice(0, 3).map((service: any, index: number) => {
-              return (
-                <RevealOnScroll key={service._id} direction="up" delay={index * 0.1}>
-                  <Link href={`/services/${service.slug || ''}`} className="block group relative h-full">
-                    <div className="relative aspect-[4/5] rounded-[2rem] overflow-hidden mb-8">
-                      <Image 
-                        src={`/placeholder-${(index % 2) + 1}.jpg`} 
-                        alt={service.title} 
-                        fill 
-                        className="object-cover transition-transform duration-1000 group-hover:scale-110" 
-                      />
-                      <div className="absolute inset-0 bg-ink/20 group-hover:bg-ink/40 transition-colors duration-500" />
-                    </div>
-                    
-                    {/* Overlapping Card */}
-                    <div className="bg-white p-8 md:p-10 absolute bottom-0 left-4 right-4 md:-bottom-12 md:left-8 md:right-8 transition-transform duration-500 group-hover:-translate-y-4 shadow-[0_30px_60px_rgba(0,0,0,0.05)] flex flex-col justify-between" style={{ borderTopLeftRadius: '2rem', borderBottomRightRadius: '2rem' }}>
-                      <div>
-                        <h3 className="text-xl md:text-2xl font-bold mb-4 line-clamp-1">{service.title}</h3>
-                        <p className="text-gray text-sm md:text-base line-clamp-3 mb-6 leading-relaxed">
-                          {service.shortDescription}
-                        </p>
-                      </div>
-                      <span className="text-xs font-bold tracking-widest uppercase flex items-center gap-2 group-hover:text-accent transition-colors">
-                        View All Services &rarr;
-                      </span>
-                    </div>
-                  </Link>
-                </RevealOnScroll>
-              )
-            })}
+          <div className="flex flex-col md:flex-row gap-12 items-center">
+            <div className="w-full md:w-1/2 flex flex-col gap-4">
+              {displayServices.slice(0, 4).map((service: any, index: number) => {
+                return (
+                  <RevealOnScroll key={service._id} direction="up" delay={index * 0.1}>
+                    <Link href={`/services/${service.slug || ''}`} className={`flex items-center justify-between p-6 rounded-2xl border transition-all ${index === 1 ? 'bg-accent border-accent text-white' : 'bg-transparent border-white/10 text-gray-300 hover:border-white/30 hover:text-white'}`}>
+                      <h3 className="text-lg font-bold">{service.title}</h3>
+                      <Icons.ArrowUpRight className={index === 1 ? 'text-white' : 'text-gray-500'} />
+                    </Link>
+                  </RevealOnScroll>
+                )
+              })}
+            </div>
+            <div className="w-full md:w-1/2">
+               <div className="relative aspect-[4/5] md:aspect-square rounded-[3rem] overflow-hidden">
+                  <Image 
+                    src="/placeholder-2.jpg" 
+                    alt="Commercial Construction" 
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover" 
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-8">
+                    <h3 className="text-3xl font-bold text-white mb-2">Commercial Construction</h3>
+                    <p className="text-gray-300 text-sm">We provide high-quality commercial construction services focusing on innovation and sustainability.</p>
+                  </div>
+               </div>
+            </div>
           </div>
-          <div className="h-16 md:h-24"></div> {/* Spacer for the overlapping cards */}
         </div>
       </AnimatedSection>
 
-      <AnimatedSection className="py-24 bg-ink text-white overflow-hidden relative">
-        <div className="absolute inset-0 opacity-5 bg-[url('/noise.png')] pointer-events-none mix-blend-overlay"></div>
-        <div className="container mx-auto px-6 relative z-10">
-          <div className="flex flex-col md:flex-row justify-around items-center gap-16">
+      <AnimatedSection className="py-16 bg-white border-b border-gray-200">
+        <div className="container mx-auto px-6">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-8 md:gap-0 divide-y md:divide-y-0 md:divide-x divide-gray-200">
             {stats.map((stat: any, index: number) => (
-              <RevealOnScroll key={stat._key} direction="up" delay={index * 0.1}>
-                <div className="text-center group">
+              <RevealOnScroll key={stat._key} direction="up" delay={index * 0.1} className="w-full md:w-1/4">
+                <div className="text-center group py-4 md:py-0">
                   <AnimatedNumber 
                     value={stat.number} 
-                    className="text-7xl md:text-8xl font-bold font-serif italic text-transparent bg-clip-text bg-gradient-to-br from-accent to-[#d4af37] mb-4 drop-shadow-2xl transition-transform duration-500 group-hover:scale-110" 
+                    className="text-5xl md:text-6xl font-bold mb-2 transition-transform duration-500 group-hover:scale-110" 
                   />
-                  <div className="text-xl font-medium tracking-widest uppercase opacity-80">{stat.label}</div>
+                  <div className="text-sm font-medium uppercase text-gray-500">{stat.label}</div>
                 </div>
               </RevealOnScroll>
             ))}
@@ -213,28 +234,46 @@ export default async function HomePage() {
         </div>
       </AnimatedSection>
       
-      {/* Featured Portfolio section placeholder */}
+      {/* Featured Portfolio section */}
       {displayProjects?.length > 0 && (
         <AnimatedSection className="py-24 bg-white">
           <div className="container mx-auto px-6">
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tighter mb-12">Featured Work</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="text-center mb-16">
+              <h3 className="text-accent font-bold uppercase mb-4 flex items-center justify-center gap-4">
+                <span className="w-12 h-[2px] bg-accent" />
+                Projects
+                <span className="w-12 h-[2px] bg-accent" />
+              </h3>
+              <h2 className="text-4xl md:text-5xl font-bold tracking-tighter">We Provide Effective<br/>Solution In Construction</h2>
+            </div>
+            <div className="flex flex-col gap-16 max-w-5xl mx-auto">
               {displayProjects.map((project: any, i: number) => (
                 <RevealOnScroll key={project._id} direction="up" delay={i * 0.1}>
-                  <Link href={`/portfolio/${project.slug}`} className="group block overflow-hidden rounded-2xl relative aspect-square md:aspect-[4/3]">
-                    {project.coverImage ? (
-                      <Image 
-                        src={urlFor(project.coverImage).width(800).height(600).url()} 
-                        alt={project.title}
-                        fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-105"
-                      />
-                    ) : (
-                      <div className="w-full h-full bg-gray-200" />
-                    )}
-                    <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
-                      <h3 className="text-white text-2xl font-bold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">{project.title}</h3>
-                      <p className="text-gray-300 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">{project.clientName}</p>
+                  <Link href={`/portfolio/${project.slug}`} className="group block relative">
+                    <div className={`relative aspect-[21/9] overflow-hidden shadow-2xl ${i % 2 === 0 ? 'rounded-tl-[4rem] rounded-br-[4rem] rounded-tr-2xl rounded-bl-2xl' : 'rounded-tr-[4rem] rounded-bl-[4rem] rounded-tl-2xl rounded-br-2xl'}`}>
+                      {project.coverImage ? (
+                        <Image 
+                          src={urlFor(project.coverImage).width(1200).height(600).url()} 
+                          alt={project.title}
+                          fill
+                          sizes="(max-width: 768px) 100vw, 100vw"
+                          className="object-cover transition-transform duration-700 group-hover:scale-105"
+                        />
+                      ) : (
+                        <Image src={`/placeholder-${(i % 2) + 1}.jpg`} alt={project.title} fill sizes="(max-width: 768px) 100vw, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                      )}
+                      
+                      {/* Floating Card inside */}
+                      <div className={`absolute ${i % 2 === 0 ? 'bottom-8 left-8' : 'bottom-8 right-8'} bg-white p-6 rounded-2xl shadow-xl max-w-sm`}>
+                        <div className="flex items-center gap-2 mb-2">
+                          <span className="text-xs font-bold uppercase text-accent bg-accent/10 px-3 py-1 rounded-full">{project.clientName}</span>
+                        </div>
+                        <h3 className="text-2xl font-bold text-ink mb-2">{project.title}</h3>
+                        <p className="text-gray-500 text-sm line-clamp-2">Premium construction delivering high quality standards and modern aesthetics for {project.clientName}.</p>
+                        <div className="absolute -bottom-4 -right-4 w-12 h-12 bg-accent rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                           <Icons.ArrowUpRight className="text-white" />
+                        </div>
+                      </div>
                     </div>
                   </Link>
                 </RevealOnScroll>
@@ -250,7 +289,7 @@ export default async function HomePage() {
           <div className="container mx-auto px-6">
             <RevealOnScroll direction="up">
               <div className="text-center mb-16">
-                <h3 className="text-accent font-bold tracking-widest uppercase mb-4 flex items-center justify-center gap-4">
+                <h3 className="text-accent font-bold uppercase mb-4 flex items-center justify-center gap-4">
                   <span className="w-8 h-[2px] bg-accent" />
                   Team Members
                   <span className="w-8 h-[2px] bg-accent" />
@@ -264,23 +303,22 @@ export default async function HomePage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
               {displayTeam.map((member: any, i: number) => (
                 <RevealOnScroll key={i} direction="up" delay={i * 0.1}>
-                  <div className="text-center">
+                  <div className="text-center group">
                     <div className="relative w-48 h-48 mx-auto rounded-full overflow-hidden mb-6 bg-white/10 border-4 border-transparent hover:border-accent transition-all duration-300">
                       {member.photo ? (
                         <Image 
                           src={urlFor(member.photo).url()}
                           alt={member.name}
                           fill
-                          className="object-cover"
+                          sizes="(max-width: 768px) 100vw, 25vw"
+                          className="object-cover transition-transform duration-700 group-hover:scale-110"
                         />
                       ) : (
-                        <div className="w-full h-full bg-gray-600 flex items-center justify-center">
-                          <Icons.User size={48} className="text-gray-400" />
-                        </div>
+                        <Image src={`/placeholder-${(i % 2) + 1}.jpg`} alt={member.name} fill sizes="(max-width: 768px) 100vw, 25vw" className="object-cover transition-transform duration-700 group-hover:scale-110" />
                       )}
                     </div>
                     <h3 className="text-xl font-bold mb-1">{member.name}</h3>
-                    <p className="text-accent text-sm font-medium">{member.role}</p>
+                    <p className="text-accent text-sm font-medium mt-1">{member.role}</p>
                   </div>
                 </RevealOnScroll>
               ))}
@@ -295,44 +333,45 @@ export default async function HomePage() {
           <div className="container mx-auto px-6">
             <RevealOnScroll direction="up">
               <div className="text-center mb-16">
-                <h3 className="text-accent font-bold tracking-widest uppercase mb-4 flex items-center justify-center gap-4">
+                <h3 className="text-accent font-bold uppercase mb-4 flex items-center justify-center gap-4">
                   <span className="w-8 h-[2px] bg-accent" />
                   Reviews
                   <span className="w-8 h-[2px] bg-accent" />
                 </h3>
                 <SplitTextReveal 
-                  text="What Our Client Say?"
-                  className="text-5xl md:text-7xl font-bold tracking-tighter justify-center"
+                  text="What Our Client Say"
+                  className="text-4xl md:text-6xl font-bold tracking-tighter justify-center"
                 />
               </div>
             </RevealOnScroll>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
               {displayTestimonials.map((testimonial: any, i: number) => (
                 <RevealOnScroll key={testimonial._id} direction="up" delay={i * 0.1}>
-                  <div className="bg-white rounded-[3rem] rounded-tl-none p-12 flex flex-col md:flex-row gap-10 items-center text-ink relative shadow-[0_40px_80px_rgba(0,0,0,0.04)] border border-border group-hover:border-accent transition-colors duration-500">
-                    <div className="absolute -bottom-8 right-12 text-[10rem] text-base font-serif leading-none rotate-12 group-hover:-rotate-12 transition-transform duration-700">"</div>
-                    <div className="w-40 h-40 shrink-0 rounded-full bg-base overflow-hidden relative border-[6px] border-white shadow-xl">
-                      {testimonial.clientPhoto ? (
-                        <Image 
-                          src={urlFor(testimonial.clientPhoto).url()} 
-                          alt={testimonial.clientName}
-                          fill
-                          className="object-cover"
-                        />
-                      ) : (
-                        <div className="w-full h-full flex items-center justify-center bg-base text-gray">
-                          <Icons.User size={40} />
-                        </div>
-                      )}
+                  <div className="bg-white rounded-3xl p-10 md:p-14 relative shadow-lg">
+                    <div className="absolute top-10 right-10 opacity-10">
+                      <Icons.Quote size={80} className="text-accent" />
                     </div>
-                    <div className="flex flex-col relative z-10">
-                      <p className="text-xl md:text-2xl font-serif italic mb-8 leading-relaxed opacity-90 text-gray">
-                        {testimonial.quote}
-                      </p>
+                    <p className="text-xl md:text-2xl font-medium mb-10 leading-relaxed text-ink relative z-10 max-w-xl">
+                      "{testimonial.quote}"
+                    </p>
+                    <div className="flex items-center gap-6 relative z-10">
+                      <div className="w-16 h-16 shrink-0 rounded-full overflow-hidden relative shadow-md">
+                        {testimonial.clientPhoto ? (
+                          <Image 
+                            src={urlFor(testimonial.clientPhoto).url()} 
+                            alt={testimonial.clientName}
+                            fill
+                            sizes="64px"
+                            className="object-cover"
+                          />
+                        ) : (
+                          <Image src={`/placeholder-${(i % 2) + 1}.jpg`} alt={testimonial.clientName} fill sizes="64px" className="object-cover" />
+                        )}
+                      </div>
                       <div>
-                        <h4 className="text-2xl font-bold uppercase tracking-tight">{testimonial.clientName}</h4>
-                        <p className="text-accent font-medium tracking-widest text-xs uppercase mt-1">{testimonial.companyLocation}</p>
+                        <h4 className="text-xl font-bold">{testimonial.clientName}</h4>
+                        <p className="text-accent font-medium text-sm">{testimonial.companyLocation}</p>
                       </div>
                     </div>
                   </div>
