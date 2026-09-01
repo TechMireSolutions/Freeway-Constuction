@@ -25,12 +25,16 @@ export const metadata: Metadata = {
   },
   description: defaultMeta.description,
   applicationName: defaultMeta.title,
+  icons: {
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={`${display.variable} ${sans.variable}`}>
-      <body>
+      <body suppressHydrationWarning>
         <SmoothScrolling>{children}</SmoothScrolling>
       </body>
     </html>

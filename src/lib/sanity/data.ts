@@ -87,11 +87,15 @@ export async function getServices(): Promise<ServiceCard[]> {
 export async function getFeaturedProjects(): Promise<ProjectCard[]> {
   try {
     const projects: ProjectCard[] = await client.fetch(featuredProjectsQuery);
-    if (projects.length) return projects;
+    // If we have 3+ featured projects, we're good
+    if (projects.length >= 3) return projects.slice(0, 4);
+    // Otherwise top up with non-featured projects to fill the grid (1 hero + 2 small)
     const all = await getProjects();
-    return all.slice(0, 4);
+    const ids = new Set(projects.map((p) => p._id));
+    const topUp = all.filter((p) => !ids.has(p._id));
+    return [...projects, ...topUp].slice(0, 4);
   } catch {
-    return [];
+    return fallbackProjects;
   }
 }
 

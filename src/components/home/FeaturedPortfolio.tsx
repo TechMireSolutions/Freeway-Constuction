@@ -1,3 +1,6 @@
+"use client";
+
+import { motion } from "motion/react";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { RevealOnScroll } from "@/components/shared/RevealOnScroll";
@@ -36,16 +39,23 @@ export function FeaturedPortfolio({ projects }: FeaturedPortfolioProps) {
       </RevealOnScroll>
 
       <div className="mt-14 grid min-w-0 grid-cols-1 gap-5 md:grid-cols-12 md:gap-6">
-        <RevealOnScroll className="min-w-0 md:col-span-7">
-          <ProjectCardView project={first} large />  
-        </RevealOnScroll>
+        {/* No opacity animation on the priority LCP card — only translateY so the image loads eagerly */}
+        <motion.div
+          className="min-w-0 md:col-span-7"
+          initial={{ y: 20 }}
+          whileInView={{ y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <ProjectCardView project={first} large priority />
+        </motion.div>
 
-        <div className="flex flex-col gap-5 md:col-span-5 md:gap-6">
+        <div className="flex flex-col gap-5 md:col-span-5 md:h-full md:gap-6">
           {rest.slice(0, 2).map((project, index) => (
             <RevealOnScroll
               key={project._id}
               delay={0.08 * (index + 1)}
-              className="min-w-0"
+              className="min-w-0 flex-1"
             >
               <ProjectCardView project={project} />
             </RevealOnScroll>
@@ -59,9 +69,11 @@ export function FeaturedPortfolio({ projects }: FeaturedPortfolioProps) {
 function ProjectCardView({
   project,
   large,
+  priority,
 }: {
   project: ProjectCard;
   large?: boolean;
+  priority?: boolean;
 }) {
   return (
     <Link
@@ -70,7 +82,7 @@ function ProjectCardView({
         "group relative block min-w-0 overflow-hidden rounded-2xl bg-ink",
         large
           ? "min-h-[420px] md:min-h-[560px]"
-          : "aspect-[4/3] md:aspect-auto md:h-full",
+          : "aspect-[4/3] md:aspect-auto md:min-h-[260px] md:h-full",
       )}
     >
       {project.coverImage ? (
@@ -78,6 +90,7 @@ function ProjectCardView({
           image={project.coverImage}
           fill
           sizes={large ? "(max-width: 768px) 100vw, 58vw" : "(max-width: 768px) 100vw, 40vw"}
+          priority={priority}
           className="opacity-90 transition-transform duration-700 ease-out group-hover:scale-[1.05]"
         />
       ) : null}
