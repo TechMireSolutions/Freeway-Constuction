@@ -42,7 +42,9 @@ export function Navbar({ settings }: NavbarProps) {
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         className={cn(
           "fixed inset-x-0 top-0 z-50 transition-all duration-500",
-          scrolled || open ? "bg-base/80 backdrop-blur-md" : "bg-transparent",
+          scrolled || open
+            ? "border-b border-white/10 bg-ink/85 backdrop-blur-md"
+            : "bg-gradient-to-b from-ink/70 via-ink/25 to-transparent",
         )}
       >
         <nav
@@ -51,7 +53,7 @@ export function Navbar({ settings }: NavbarProps) {
           )}
           aria-label="Main navigation"
         >
-          <Logo settings={settings} />
+          <Logo settings={settings} light />
 
           <div className="hidden items-center gap-8 lg:flex">
             {navigation.map((item) => {
@@ -62,7 +64,7 @@ export function Navbar({ settings }: NavbarProps) {
                   href={item.href}
                   className={cn(
                     "group relative py-2 text-sm font-medium tracking-wide transition-colors duration-300",
-                    active ? "text-ink" : "text-neutral hover:text-ink",
+                    active ? "text-white" : "text-white/75 hover:text-white",
                   )}
                 >
                   {item.label}
@@ -82,7 +84,7 @@ export function Navbar({ settings }: NavbarProps) {
             {settings?.phone ? (
               <a
                 href={`tel:${settings.phone}`}
-                className="inline-flex items-center gap-2 text-sm font-medium text-ink transition-colors hover:text-accent"
+                className="inline-flex items-center gap-2 text-sm font-medium text-white/75 transition-colors hover:text-white"
               >
                 <Phone className="h-4 w-4" strokeWidth={1.5} />
                 {settings.phone}
@@ -90,7 +92,7 @@ export function Navbar({ settings }: NavbarProps) {
             ) : null}
             <Link
               href="/contact"
-              className="group inline-flex items-center gap-1.5 rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-base transition-colors duration-300 hover:bg-accent"
+              className="group inline-flex items-center gap-1.5 rounded-full bg-white px-5 py-2.5 text-sm font-medium text-ink transition-colors duration-300 hover:bg-accent hover:text-white"
             >
               Get a Quote
               <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -100,7 +102,7 @@ export function Navbar({ settings }: NavbarProps) {
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
-            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-divider bg-base/60 text-ink transition-colors lg:hidden"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/30 bg-white/10 text-white transition-colors lg:hidden"
             aria-expanded={open}
             aria-label={open ? "Close menu" : "Open menu"}
           >

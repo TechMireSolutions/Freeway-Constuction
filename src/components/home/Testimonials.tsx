@@ -65,7 +65,7 @@ export function Testimonials({ testimonials }: TestimonialsProps) {
         </RevealOnScroll>
 
         <div className="relative mt-12 overflow-hidden">
-          <AnimatePresence mode="wait">
+          <AnimatePresence mode="wait" initial={false}>
             <motion.figure
               key={current._id}
               initial={reduce ? false : { opacity: 0, x: 48 }}

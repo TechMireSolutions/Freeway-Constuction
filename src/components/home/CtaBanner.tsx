@@ -17,7 +17,7 @@ export function CtaBanner({ cta, compact }: CtaBannerProps) {
   const buttonText = cta?.buttonText || "Get a Free Estimate";
 
   return (
-    <section className={compact ? "bg-base" : "mx-auto max-w-7xl px-5 pb-20 sm:px-8 md:pb-28"}>
+    <section className={compact ? "bg-base" : "mx-auto max-w-7xl px-5 pt-20 pb-20 sm:px-8 md:pb-28 md:pt-28"}>
       <RevealOnScroll
         className={compact ? "" : "mt-0"}
       >
