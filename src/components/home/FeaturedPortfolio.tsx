@@ -40,12 +40,12 @@ export function FeaturedPortfolio({ projects }: FeaturedPortfolioProps) {
           <ProjectCardView project={first} large />  
         </RevealOnScroll>
 
-        <div className="flex min-h-0 flex-col gap-5 md:col-span-5 md:gap-6">
+        <div className="flex flex-col gap-5 md:col-span-5 md:gap-6">
           {rest.slice(0, 2).map((project, index) => (
             <RevealOnScroll
               key={project._id}
               delay={0.08 * (index + 1)}
-              className="min-h-0 flex-1 basis-0"
+              className="min-w-0"
             >
               <ProjectCardView project={project} />
             </RevealOnScroll>
@@ -70,7 +70,7 @@ function ProjectCardView({
         "group relative block min-w-0 overflow-hidden rounded-2xl bg-ink",
         large
           ? "min-h-[420px] md:min-h-[560px]"
-          : "aspect-[4/3] md:h-full md:aspect-auto",
+          : "aspect-[4/3] md:aspect-auto md:h-full",
       )}
     >
       {project.coverImage ? (
