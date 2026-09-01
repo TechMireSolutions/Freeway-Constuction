@@ -99,9 +99,9 @@ function PortfolioCard({ project }: { project: ProjectCard }) {
       </div>
       <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-6 drop-shadow-md">
         <div>
-          <p className="text-xs font-medium uppercase tracking-[0.2em] text-accent">
+          <span className="inline-flex items-center rounded-full border border-white/20 bg-white/15 px-3 py-1 text-xs font-medium uppercase tracking-[0.2em] text-accent backdrop-blur-md">
             {project.category?.title || project.location || "Project"}
-          </p>
+          </span>
           <h3 className="mt-1.5 font-display text-lg font-semibold tracking-tight text-white">
             {project.title}
           </h3>

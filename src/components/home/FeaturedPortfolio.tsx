@@ -84,9 +84,9 @@ function ProjectCardView({
       <div className="absolute inset-0 bg-gradient-to-t from-ink/95 via-ink/30 to-transparent" />
       <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-6 drop-shadow-md md:p-8">
         <div>
-          <p className="text-xs font-medium uppercase tracking-[0.2em] text-accent">
+          <span className="inline-flex items-center rounded-full border border-white/20 bg-white/15 px-3 py-1 text-xs font-medium uppercase tracking-[0.2em] text-accent backdrop-blur-md">
             {project.category?.title || project.location || "Project"}
-          </p>
+          </span>
           <h3
             className={cn(
               "mt-2 font-display font-semibold tracking-tight text-white",
