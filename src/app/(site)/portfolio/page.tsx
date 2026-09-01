@@ -28,20 +28,22 @@ export default async function PortfolioPage() {
 
   return (
     <>
-      <div className="pt-32 md:pt-44" />
-      <section className="mx-auto max-w-7xl px-5 sm:px-8">
-        <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
-          <div className="max-w-xl">
-            <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-accent">
-              <span className="h-px w-6 bg-accent" aria-hidden="true" />
-              Portfolio
-            </span>
-            <h1 className="mt-4 font-display text-4xl font-semibold tracking-tight text-ink sm:text-5xl">
-              Our work, in detail
-            </h1>
-          </div>
+      {/* ── Dark page hero ── */}
+      <section className="bg-ink">
+        <div className="mx-auto max-w-7xl px-5 pb-14 pt-32 sm:px-8 md:pb-20 md:pt-40">
+          <p className="inline-flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.25em] text-accent">
+            <span className="h-px w-8 bg-accent" aria-hidden="true" />
+            Portfolio
+          </p>
+          <h1 className="mt-2 font-display text-4xl font-semibold leading-tight tracking-tight text-white sm:text-5xl md:text-6xl">
+            Our work,
+            <br />
+            <span className="text-white/35">in detail.</span>
+          </h1>
         </div>
+      </section>
 
+      <section className="mx-auto max-w-7xl px-5 sm:px-8">
         <PortfolioGrid projects={projects} services={services} />
       </section>
 

@@ -31,29 +31,71 @@ export default async function ContactPage() {
     getServices(),
   ]);
 
+  const contactItems = [
+    settings?.phone && {
+      icon: Phone,
+      label: "Phone",
+      value: settings.phone,
+      href: `tel:${settings.phone}`,
+    },
+    settings?.email && {
+      icon: Mail,
+      label: "Email",
+      value: settings.email,
+      href: `mailto:${settings.email}`,
+    },
+    settings?.address && {
+      icon: MapPin,
+      label: "Address",
+      value: settings.address,
+      href: null,
+    },
+    contact?.businessHours && {
+      icon: Clock,
+      label: "Hours",
+      value: contact.businessHours,
+      href: null,
+    },
+  ].filter(Boolean) as {
+    icon: typeof Phone;
+    label: string;
+    value: string;
+    href: string | null;
+  }[];
+
   return (
     <>
       <BreadcrumbJsonLd items={[{ name: "Contact", href: "/contact" }]} />
 
-      <section className="mx-auto max-w-7xl px-5 pt-32 sm:px-8 md:pt-44">
-        <RevealOnScroll>
-          <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-accent">
-            <span className="h-px w-6 bg-accent" aria-hidden="true" />
-            Contact
-          </span>
-          <h1 className="mt-5 max-w-3xl font-display text-4xl font-semibold tracking-tight text-ink sm:text-5xl md:text-6xl">
-            {contact?.heading || "Let's talk about your project"}
-          </h1>
-          {contact?.introText ? (
-            <p className="mt-5 max-w-xl text-lg text-neutral">{contact.introText}</p>
-          ) : null}
-        </RevealOnScroll>
+      {/* ── Dark page hero ── */}
+      <section className="bg-ink">
+        <div className="mx-auto max-w-7xl px-5 pb-14 pt-32 sm:px-8 md:pb-20 md:pt-40">
+          <RevealOnScroll>
+            <p className="inline-flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.25em] text-accent">
+              <span className="h-px w-8 bg-accent" aria-hidden="true" />
+              Contact
+            </p>
+            <h1 className="mt-2 font-display text-4xl font-semibold leading-tight tracking-tight text-white sm:text-5xl md:text-6xl">
+              Let&apos;s talk about
+              <br />
+              <span className="text-white/35">your project.</span>
+            </h1>
+            {contact?.introText && (
+              <p className="mt-4 max-w-lg text-base leading-relaxed text-white/45">
+                {contact.introText}
+              </p>
+            )}
+          </RevealOnScroll>
+        </div>
       </section>
 
+      {/* ── Form + contact info ── */}
       <section className="mx-auto max-w-7xl px-5 py-16 sm:px-8 md:py-24">
-        <div className="grid grid-cols-1 gap-14 lg:grid-cols-12">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
+
+          {/* Contact form */}
           <RevealOnScroll className="lg:col-span-7">
-            <div className="rounded-2xl border border-divider bg-surface p-6 sm:p-8 md:p-10">
+            <div className="rounded-2xl border border-divider bg-surface p-6 shadow-sm sm:p-8 md:p-10">
               <ContactForm
                 services={services}
                 successMessage={contact?.successMessage}
@@ -61,80 +103,54 @@ export default async function ContactPage() {
             </div>
           </RevealOnScroll>
 
+          {/* Contact info sidebar */}
           <aside className="lg:col-span-5">
             <RevealOnScroll delay={0.1}>
-              <div className="flex flex-col gap-8">
-                <div className="flex flex-col gap-5">
-                  {settings?.phone ? (
-                    <a
-                      href={`tel:${settings.phone}`}
-                      className="group flex items-center gap-4"
-                    >
-                      <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-ink text-base transition-colors duration-300 group-hover:bg-accent">
-                        <Phone className="h-5 w-5" />
-                      </span>
-                      <div>
-                        <p className="text-xs uppercase tracking-[0.2em] text-neutral">Phone</p>
-                        <p className="font-medium text-ink">{settings.phone}</p>
-                      </div>
-                    </a>
-                  ) : null}
+              <div className="flex flex-col gap-3">
 
-                  {settings?.email ? (
-                    <a
-                      href={`mailto:${settings.email}`}
-                      className="group flex items-center gap-4"
-                    >
-                      <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-ink text-base transition-colors duration-300 group-hover:bg-accent">
-                        <Mail className="h-5 w-5" />
+                {/* Info cards */}
+                {contactItems.map(({ icon: IconComp, label, value, href }) => {
+                  const content = (
+                    <div className="group flex items-center gap-4 rounded-2xl border border-divider bg-surface px-5 py-4 transition-all duration-300 hover:border-ink/20 hover:shadow-md">
+                      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-divider bg-base text-ink transition-all duration-300 group-hover:border-accent/30 group-hover:bg-accent/8 group-hover:text-accent">
+                        <IconComp className="h-4.5 w-4.5" strokeWidth={1.5} />
                       </span>
-                      <div>
-                        <p className="text-xs uppercase tracking-[0.2em] text-neutral">Email</p>
-                        <p className="font-medium text-ink">{settings.email}</p>
-                      </div>
-                    </a>
-                  ) : null}
-
-                  {settings?.address ? (
-                    <div className="flex items-center gap-4">
-                      <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-ink text-base">
-                        <MapPin className="h-5 w-5" />
-                      </span>
-                      <div>
-                        <p className="text-xs uppercase tracking-[0.2em] text-neutral">Address</p>
-                        <p className="font-medium text-ink">{settings.address}</p>
+                      <div className="min-w-0">
+                        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-neutral/60">
+                          {label}
+                        </p>
+                        <p className="mt-0.5 truncate font-medium text-ink">
+                          {value}
+                        </p>
                       </div>
                     </div>
-                  ) : null}
+                  );
 
-                  {contact?.businessHours ? (
-                    <div className="flex items-center gap-4">
-                      <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-ink text-base">
-                        <Clock className="h-5 w-5" />
-                      </span>
-                      <div>
-                        <p className="text-xs uppercase tracking-[0.2em] text-neutral">Hours</p>
-                        <p className="font-medium text-ink">{contact.businessHours}</p>
-                      </div>
-                    </div>
-                  ) : null}
-                </div>
+                  return href ? (
+                    <a key={label} href={href}>
+                      {content}
+                    </a>
+                  ) : (
+                    <div key={label}>{content}</div>
+                  );
+                })}
 
+                {/* Office locations */}
                 {contact?.officeLocations?.length ? (
-                  <div className="space-y-4">
-                    <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-neutral">
+                  <div className="mt-2 space-y-3">
+                    <p className="px-1 text-xs font-semibold uppercase tracking-[0.2em] text-neutral/60">
                       Office locations
-                    </h2>
+                    </p>
                     {contact.officeLocations.map((location: OfficeLocation) => (
                       <div
                         key={location.name}
-                        className="rounded-xl border border-divider bg-surface p-5"
+                        className="rounded-2xl border border-divider bg-surface p-5"
                       >
-                        <p className="font-medium text-ink">{location.name}</p>
+                        <p className="font-semibold text-ink">{location.name}</p>
                         <p className="mt-1 text-sm text-neutral">{location.address}</p>
-                        {location.phone ? (
+                        {location.phone && (
                           <p className="mt-1 text-sm text-neutral">{location.phone}</p>
-                        ) : null}
+                        )}
                       </div>
                     ))}
                   </div>
@@ -144,9 +160,10 @@ export default async function ContactPage() {
           </aside>
         </div>
 
+        {/* Map */}
         {contact?.mapEmbedUrl ? (
           <RevealOnScroll className="mt-16">
-            <div className="aspect-[21/9] overflow-hidden rounded-2xl border border-divider">
+            <div className="aspect-[21/9] overflow-hidden rounded-2xl border border-divider shadow-sm">
               <iframe
                 src={contact.mapEmbedUrl}
                 title="Map"
