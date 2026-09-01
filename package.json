@@ -1,0 +1,40 @@
+{
+  "name": "freeway-constructions",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "seed": "node sanity/seed.js"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^5.9.1",
+    "@portabletext/react": "^8.0.1",
+    "@sanity/image-url": "^2.1.1",
+    "lenis": "^1.3.26",
+    "lucide-react": "^0.469.0",
+    "motion": "^12.4.7",
+    "next": "16.3.3",
+    "next-sanity": "^13.3.3",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "react-hook-form": "^7.86.0",
+    "sanity": "^6.11.0",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@sanity/client": "^8.4.0",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "dotenv": "^17.4.2",
+    "eslint": "^9",
+    "eslint-config-next": "16.3.3",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}
