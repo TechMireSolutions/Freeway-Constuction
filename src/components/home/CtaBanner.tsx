@@ -17,7 +17,7 @@ export function CtaBanner({ cta, compact }: CtaBannerProps) {
   const buttonText = cta?.buttonText || "Get a Free Estimate";
 
   return (
-    <section className={compact ? "bg-base" : "mx-auto max-w-7xl px-5 pt-20 pb-20 sm:px-8 md:pb-28 md:pt-28"}>
+    <section className={compact ? "bg-base" : "mx-auto max-w-7xl px-4 pb-16 pt-16 sm:px-8 md:pb-28 md:pt-28"}>
       <RevealOnScroll
         className={compact ? "" : "mt-0"}
       >
@@ -36,18 +36,18 @@ export function CtaBanner({ cta, compact }: CtaBannerProps) {
             </div>
           ) : null}
 
-          <div className="relative z-10 flex flex-col items-start gap-8 px-6 py-16 sm:px-12 md:flex-row md:items-center md:justify-between md:px-16 md:py-20">
+          <div className="relative z-10 flex flex-col items-start gap-6 px-5 py-10 sm:px-10 sm:py-14 md:flex-row md:items-center md:justify-between md:px-16 md:py-20">
             <div className="max-w-2xl">
-              <h2 className="font-display text-3xl font-semibold leading-tight tracking-tight text-white sm:text-4xl md:text-5xl">
+              <h2 className="font-display text-2xl font-semibold leading-tight tracking-tight text-white sm:text-3xl md:text-5xl">
                 {heading}
               </h2>
-              <p className="mt-4 max-w-xl text-base leading-relaxed text-white/70">
+              <p className="mt-3 max-w-xl text-sm leading-relaxed text-white/70 sm:text-base">
                 {subheading}
               </p>
             </div>
             <Link
               href="/contact"
-              className="group inline-flex shrink-0 items-center gap-2 rounded-full bg-accent px-8 py-4 text-sm font-medium text-white transition-colors duration-300 hover:bg-white hover:text-ink"
+              className="group inline-flex w-full shrink-0 items-center justify-center gap-2 rounded-full bg-accent px-8 py-4 text-sm font-medium text-white transition-colors duration-300 hover:bg-white hover:text-ink sm:w-auto sm:justify-start"
             >
               {buttonText}
               <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
