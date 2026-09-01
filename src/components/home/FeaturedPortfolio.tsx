@@ -40,17 +40,14 @@ export function FeaturedPortfolio({ projects }: FeaturedPortfolioProps) {
           <ProjectCardView project={first} large />  
         </RevealOnScroll>
 
-        <div className="grid min-w-0 grid-cols-1 gap-5 md:col-span-5 md:grid-cols-2 md:gap-6">
-          {rest.slice(0, 3).map((project, index) => (
+        <div className="flex min-h-0 flex-col gap-5 md:col-span-5 md:gap-6">
+          {rest.slice(0, 2).map((project, index) => (
             <RevealOnScroll
               key={project._id}
               delay={0.08 * (index + 1)}
-              className={cn("min-w-0", index === 2 && "md:col-span-2")}
+              className="min-h-0 flex-1 basis-0"
             >
-              <ProjectCardView
-                project={project}
-                wide={index === 2}
-              />
+              <ProjectCardView project={project} />
             </RevealOnScroll>
           ))}
         </div>
@@ -62,19 +59,18 @@ export function FeaturedPortfolio({ projects }: FeaturedPortfolioProps) {
 function ProjectCardView({
   project,
   large,
-  wide,
 }: {
   project: ProjectCard;
   large?: boolean;
-  wide?: boolean;
 }) {
   return (
     <Link
       href={`/portfolio/${project.slug}`}
       className={cn(
         "group relative block min-w-0 overflow-hidden rounded-2xl bg-ink",
-        large ? "min-h-[420px] md:min-h-[560px]" : "aspect-[4/3]",
-        wide && "md:aspect-[16/7]",
+        large
+          ? "min-h-[420px] md:min-h-[560px]"
+          : "aspect-[4/3] md:h-full md:aspect-auto",
       )}
     >
       {project.coverImage ? (
@@ -85,8 +81,8 @@ function ProjectCardView({
           className="opacity-90 transition-transform duration-700 ease-out group-hover:scale-[1.05]"
         />
       ) : null}
-      <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-transparent to-transparent" />
-      <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-6 md:p-8">
+      <div className="absolute inset-0 bg-gradient-to-t from-ink/95 via-ink/30 to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-6 drop-shadow-md md:p-8">
         <div>
           <p className="text-xs font-medium uppercase tracking-[0.2em] text-accent">
             {project.category?.title || project.location || "Project"}

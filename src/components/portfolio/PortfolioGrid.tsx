@@ -95,9 +95,9 @@ function PortfolioCard({ project }: { project: ProjectCard }) {
         ) : (
           <div className="h-full w-full bg-divider/50" />
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-ink/75 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-ink/95 via-ink/30 to-transparent" />
       </div>
-      <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-6">
+      <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-6 drop-shadow-md">
         <div>
           <p className="text-xs font-medium uppercase tracking-[0.2em] text-accent">
             {project.category?.title || project.location || "Project"}
