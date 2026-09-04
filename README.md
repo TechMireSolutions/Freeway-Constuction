@@ -6,8 +6,9 @@ A modern, minimal, production-grade marketing website for **Freeway Construction
 
 - **Framework** — Next.js 16 (App Router, server components, Turbopack)
 - **CMS** — Sanity v6, embedded Studio at `/studio`
-- **Styling** — Tailwind CSS v4 (design tokens in `src/app/globals.css`)
-- **Animation** — Framer Motion (`motion`), Lenis smooth scrolling
+- **Styling** —- Tailwind v4 with `@theme` directive in `src/app/globals.css`.
+- Semantic tokens: `--color-base`, `--color-ink`, `--color-accent` (`#FCB816`).
+- Uses `lucide-react` for iconography (`strokeWidth={1.5}`).ng
 - **Forms** — React Hook Form + Zod, saved to Sanity via `/api/contact`
 - **Images** — `next/image` with Sanity's image pipeline (`@sanity/image-url`)
 - **Icons** — `lucide-react`

@@ -5,7 +5,7 @@
   --color-surface: #ffffff;
   --color-ink: #141414;
   --color-ink-soft: #1c1c1c;
-  --color-accent: #e85c2b;
+  --color-accent: #FCB816;
   --color-neutral: #6b6b6b;
   --color-divider: #e5e3de;
 
@@ -17,7 +17,7 @@
 
 :root {
   --color-base: #fafaf8;
-  --color-accent: #e85c2b;
+  --color-accent: #FCB816;
 }
 
 * {
