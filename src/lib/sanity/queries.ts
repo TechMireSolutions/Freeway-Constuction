@@ -5,6 +5,7 @@ export const siteSettingsQuery = groq`
     companyName,
     tagline,
     logo,
+    favicon,
     phone,
     email,
     address,

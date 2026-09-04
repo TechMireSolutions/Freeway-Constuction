@@ -32,6 +32,13 @@ export const siteSettings = defineType({
       ],
     }),
     defineField({
+      name: "favicon",
+      title: "Favicon",
+      type: "image",
+      description: "Upload a favicon for the site. Recommended size: 32x32 pixels or SVG.",
+      options: { accept: "image/x-icon,image/png,image/svg+xml" },
+    }),
+    defineField({
       name: "phone",
       title: "Phone",
       type: "string",

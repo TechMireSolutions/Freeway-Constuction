@@ -2,10 +2,17 @@
 
 import { useEffect, type ReactNode } from "react";
 import Lenis from "lenis";
+import { usePathname } from "next/navigation";
 
 export function SmoothScrolling({ children }: { children: ReactNode }) {
+  const pathname = usePathname();
+
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return;
+    }
+
+    if (pathname?.startsWith("/studio")) {
       return;
     }
 

@@ -16,6 +16,7 @@ export interface SiteSettings {
   companyName: string;
   tagline?: string;
   logo?: ImageWithAlt;
+  favicon?: ImageWithAlt;
   phone?: string;
   email?: string;
   address?: string;
