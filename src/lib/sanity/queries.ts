@@ -8,6 +8,7 @@ export const siteSettingsQuery = groq`
     favicon,
     phone,
     email,
+    adminEmail,
     address,
     socialLinks[] { label, url },
     defaultSeoImage,

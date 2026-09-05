@@ -76,7 +76,7 @@ export function Testimonials({ testimonials }: TestimonialsProps) {
             >
               <div className="max-w-3xl">
                 {current.rating ? (
-                  <div className="mb-5 flex gap-1" aria-label={`${current.rating} out of 5 stars`}>
+                  <div className="mb-5 flex gap-1" role="img" aria-label={`${current.rating} out of 5 stars`}>
                     {Array.from({ length: current.rating }).map((_, i) => (
                       <Star key={i} className="h-4 w-4 fill-accent text-accent" strokeWidth={1.5} />
                     ))}

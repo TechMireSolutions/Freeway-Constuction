@@ -49,6 +49,12 @@ export const siteSettings = defineType({
       type: "string",
     }),
     defineField({
+      name: "adminEmail",
+      title: "Admin Email",
+      type: "string",
+      description: "Email address to receive contact form submissions.",
+    }),
+    defineField({
       name: "address",
       title: "Address",
       type: "string",

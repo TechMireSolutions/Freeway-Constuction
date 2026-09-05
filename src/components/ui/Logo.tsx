@@ -16,7 +16,7 @@ export function Logo({ settings, light }: LogoProps) {
     return (
       <Link href="/" className="flex items-center" aria-label={`${name} — home`}>
         <Image
-          src={urlFor(settings.logo).auto("format").width(320).url()}
+          src={urlFor(settings.logo).auto("format").quality(60).width(320).url()}
           alt={settings.logo.alt || name}
           width={320}
           height={80}

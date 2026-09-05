@@ -19,6 +19,7 @@ export interface SiteSettings {
   favicon?: ImageWithAlt;
   phone?: string;
   email?: string;
+  adminEmail?: string;
   address?: string;
   socialLinks?: SocialLink[];
   defaultSeoImage?: ImageWithAlt;

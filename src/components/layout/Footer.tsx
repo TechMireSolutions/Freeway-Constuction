@@ -48,7 +48,7 @@ export function Footer({ settings }: { settings: ClientSettings | null }) {
 
           <div className="md:col-span-2" />
           <div className="md:col-span-2">
-            <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-white/40">
+            <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-white/60">
               Pages
             </h3>
             <ul className="mt-5 space-y-3">
@@ -66,7 +66,7 @@ export function Footer({ settings }: { settings: ClientSettings | null }) {
           </div>
 
           <div className="md:col-span-3">
-            <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-white/40">
+            <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-white/60">
               Contact
             </h3>
             <ul className="mt-5 space-y-3 text-sm text-white/70">
@@ -96,16 +96,10 @@ export function Footer({ settings }: { settings: ClientSettings | null }) {
           </div>
         </div>
 
-        <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 sm:flex-row">
+        <div className="mt-16 flex flex-col items-center justify-center gap-4 border-t border-white/10 pt-8 sm:flex-row">
           <p className="text-xs text-white/50">
             © {year} {settings?.companyName || "Freeway Constructions"}. All rights reserved.
           </p>
-          <Link
-            href="/studio"
-            className="text-xs text-white/50 transition-colors hover:text-white"
-          >
-            CMS Studio
-          </Link>
         </div>
       </div>
     </footer>

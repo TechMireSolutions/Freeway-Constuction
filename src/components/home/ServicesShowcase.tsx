@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence, useReducedMotion } from "motion/react";
+import { motion, AnimatePresence, useReducedMotion, useMotionValue, useSpring } from "motion/react";
 import { ArrowUpRight, MoveRight } from "lucide-react";
 import { Icon } from "@/components/ui/Icon";
 import { RevealOnScroll } from "@/components/shared/RevealOnScroll";
@@ -11,13 +11,20 @@ import type { ServiceCard } from "@/types/sanity";
 import { cn } from "@/lib/utils";
 
 interface ServicesShowcaseProps {
-  services: ServiceCard[];
+  services: ServiceCard[];  
 }
 
 export function ServicesShowcase({ services }: ServicesShowcaseProps) {
   const reduce = useReducedMotion();
   const [hovered, setHovered] = useState<number | null>(null);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  
+  const containerRef = useRef<HTMLDivElement>(null);
+  const rectRef = useRef<{ left: number; top: number } | null>(null);
+  
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const smoothX = useSpring(mouseX, { stiffness: 300, damping: 40 });
+  const smoothY = useSpring(mouseY, { stiffness: 300, damping: 40 });
 
   if (!services.length) return null;
 
@@ -43,10 +50,12 @@ export function ServicesShowcase({ services }: ServicesShowcaseProps) {
             key="glow"
             className="pointer-events-none absolute left-0 top-0 h-[600px] w-[600px] rounded-full"
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1, x: mousePos.x - 300, y: mousePos.y - 300 }}
+            animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
             style={{
+              x: smoothX,
+              y: smoothY,
               background:
                 "radial-gradient(circle, rgba(217,119,6,0.12) 0%, transparent 70%)",
             }}
@@ -82,18 +91,30 @@ export function ServicesShowcase({ services }: ServicesShowcaseProps) {
 
         {/* Main layout */}
         <div
+          ref={containerRef}
           className="relative mt-16 md:mt-24"
+          onMouseEnter={() => {
+            if (containerRef.current) {
+              const rect = containerRef.current.getBoundingClientRect();
+              rectRef.current = {
+                left: rect.left + window.scrollX,
+                top: rect.top + window.scrollY,
+              };
+            }
+          }}
           onMouseMove={(e) => {
-            const rect = e.currentTarget.getBoundingClientRect();
-            setMousePos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+            if (rectRef.current) {
+              mouseX.set(e.pageX - rectRef.current.left - 300);
+              mouseY.set(e.pageY - rectRef.current.top - 300);
+            }
           }}
         >
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-12">
             {/* Service list */}
-            <ul className="col-span-1 flex flex-col lg:col-span-7">
+            <div className="col-span-1 flex flex-col lg:col-span-7" role="list">
               {services.map((service, index) => (
                 <RevealOnScroll key={service._id} delay={0.05 * index}>
-                  <li>
+                  <div role="listitem">
                     <Link
                       href={`/services/${service.slug}`}
                       onMouseEnter={() => setHovered(index)}
@@ -166,10 +187,10 @@ export function ServicesShowcase({ services }: ServicesShowcaseProps) {
                         <ArrowUpRight className="h-4 w-4" />
                       </span>
                     </Link>
-                  </li>
+                  </div>
                 </RevealOnScroll>
               ))}
-            </ul>
+            </div>
 
             {/* Sticky image preview panel (desktop only) */}
             <div className="col-span-1 hidden lg:col-span-5 lg:block">
