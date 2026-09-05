@@ -114,18 +114,22 @@ export function Testimonials({ testimonials }: TestimonialsProps) {
           </AnimatePresence>
         </div>
 
-        <div className="mt-8 flex justify-center gap-2 md:hidden">
+        <div className="mt-8 flex justify-center md:hidden">
           {testimonials.map((t, i) => (
             <button
               key={t._id}
               type="button"
               onClick={() => setIndex(i)}
-              className={cn(
-                "h-1.5 rounded-full transition-all duration-300",
-                i === index ? "w-6 bg-accent" : "w-1.5 bg-white/30",
-              )}
+              className="flex h-12 w-12 -mx-2 items-center justify-center"
               aria-label={`Go to testimonial ${i + 1}`}
-            />
+            >
+              <span
+                className={cn(
+                  "block h-1.5 rounded-full transition-all duration-300",
+                  i === index ? "w-6 bg-accent" : "w-1.5 bg-white/30",
+                )}
+              />
+            </button>
           ))}
         </div>
       </div>

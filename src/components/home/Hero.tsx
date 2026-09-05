@@ -25,6 +25,7 @@ export function Hero({ home }: { home: HomePage }) {
               image={home.heroBackgroundImage}
               fill
               priority
+              quality={40}
               sizes="100vw"
               className="opacity-50"
             />
@@ -34,11 +35,8 @@ export function Hero({ home }: { home: HomePage }) {
       </div>
 
       <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 flex-col justify-end px-5 pb-20 pt-32 sm:px-8 md:pb-24">
-        <motion.div
-          initial={reduce ? false : { opacity: 0, y: 32 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="max-w-4xl"
+        <div
+          className="max-w-4xl opacity-0 animate-hero-text motion-reduce:animate-none motion-reduce:opacity-100 motion-reduce:transform-none"
         >
           <p className="mb-6 inline-flex items-center gap-3 text-sm font-medium uppercase tracking-[0.25em] text-white/60">
             <span className="h-px w-8 bg-accent" aria-hidden="true" />
@@ -70,7 +68,7 @@ export function Hero({ home }: { home: HomePage }) {
               View Our Work
             </Link>
           </div>
-        </motion.div>
+        </div>
 
         <motion.div
           initial={reduce ? false : { opacity: 0 }}

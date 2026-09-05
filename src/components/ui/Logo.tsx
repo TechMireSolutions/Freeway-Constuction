@@ -21,6 +21,7 @@ export function Logo({ settings, light }: LogoProps) {
           width={320}
           height={80}
           priority
+          fetchPriority="high"
           className="h-10 w-auto object-contain"
         />
       </Link>

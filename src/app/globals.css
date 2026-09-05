@@ -13,6 +13,18 @@
   --font-sans: var(--font-sans-ui), ui-sans-serif, system-ui, sans-serif;
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-hero-text: hero-text 0.9s var(--ease-out-expo) 0.2s forwards;
+}
+
+@keyframes hero-text {
+  0% {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 :root {
